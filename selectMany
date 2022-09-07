@@ -1,0 +1,40 @@
+
+static IEnumerable<string> Personas()
+{
+    yield return "Yannis";
+    yield return "Timmo";
+    yield return "Joacin";
+    yield return "Tonny";
+    yield return "Walter";
+    yield return "Adrian";
+    yield return "Fabio";
+}
+
+static IEnumerable<string> Apellidos()
+{
+    yield return "Papadopoolos";
+    yield return "Kotipelto";
+    yield return "Canns";
+    yield return "Kakko";
+    yield return "Giardino";
+    yield return "Barilari";
+    yield return "Leoni";
+}
+
+//QUERY SYNTAX
+var prsns = from p in Personas()
+            from a in Apellidos()
+            select new {Nombre = p, Apellidos = a};
+
+foreach (var item in prsns)
+{
+    Console.WriteLine($"{item.Nombre}, {item.Apellido}");
+}
+
+//METHOD SYNTAX
+var persns = Personas().SelectMany(
+             per => Apellidos()
+             .Select(ape =>
+             new {Nombre = per, Apellido = ape})
+             );
+
